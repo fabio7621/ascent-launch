@@ -1,0 +1,35 @@
+/* 全域：色彩與字體 token、基礎樣式、章節共用元素 */
+/* 版面概念：全螢幕 3D 場景在後，前景是仿發射直播的遙測 HUD；捲動 = 任務時鐘 */
+:root { --void: #04060b;
+  --ink: #e8edf5;
+  --ink-2: #aeb8c8;
+  --ink-3: #6d7a8f;
+  --line: rgba(206, 220, 240, 0.16);
+  --glass: rgba(6, 10, 18, 0.46);
+  --flame: #ffa45c;
+  --frost: #9cc9ff;
+  --warn: #ffd166;
+  --f-display: "Big Shoulders Display", "Noto Sans TC", "Arial Narrow", sans-serif;
+  --f-zh: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { background: var(--void); color: var(--ink); }
+body { font-family: var(--f-zh); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+#gl { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; z-index: 0; }
+#veil { position: fixed; inset: 0; display: grid; place-items: center; z-index: 1; pointer-events: none; transition: opacity 1.2s ease; font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; color: var(--ink-3); background: var(--void); }
+#veil.gone { opacity: 0; }
+#app { position: relative; z-index: 2; }
+button:focus-visible { outline: 2px solid var(--flame); outline-offset: 2px; }
+.chapter { position: relative; padding-inline: max(16px, 5vw); }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: .2em; color: var(--ink-2); text-transform: uppercase; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); box-shadow: 0 0 12px var(--warn); animation: blink 1.6s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .25; } }
+.track { height: 520vh; }
+.space-track { height: 300vh; }
+.chapter-mark { position: sticky; top: calc(84px + env(safe-area-inset-top, 0px)); font-family: var(--f-mono); font-size: 13.5px; letter-spacing: .24em; color: var(--ink-3); display: flex; gap: 12px; align-items: center; width: max-content; }
+.chapter-mark b { color: var(--ink); font-weight: 500; }
+.chapter-mark::before { content: ""; width: 28px; height: 1px; background: var(--ink-3); }
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow .dot { animation: none; }
+}
